@@ -2,20 +2,14 @@
   <div class="app">
     <div><button @click="isShow = !isShow">显示/隐藏</button></div>
 
-    <transition name="why" mode="out-in" :appear="true">
-      <component :is="isShow ? 'Home' : 'About'"></component>
+    <transition name="why">
+      <h2 class="title" v-if="isShow">{{ message }}</h2>
     </transition>
   </div>
 </template>
 
 <script>
-import Home from './pages/Home.vue';
-import About from './pages/About.vue';
 export default {
-  components: {
-    Home,
-    About,
-  },
   data() {
     return {
       message: 'Hello World',
@@ -40,7 +34,7 @@ export default {
     transform: scale(0);
   }
   50% {
-    transform: scale(1.2);
+    transform: scale(1.5);
   }
   100% {
     transform: scale(1);
