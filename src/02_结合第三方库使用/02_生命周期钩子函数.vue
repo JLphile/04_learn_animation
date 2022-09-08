@@ -1,14 +1,20 @@
 <template>
   <div class="app">
     <div><button @click="isShow = !isShow">显示/隐藏</button></div>
-    <transition @enter="enter" @leave="leave">
+    <transition
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter"
+      @before-leave="beforeLeave"
+      @leave="leave"
+      @after-leave="afterLeave"
+    >
       <h2 class="title" v-if="isShow">{{ message }}</h2>
     </transition>
   </div>
 </template>
 
 <script>
-import gsap from 'gsap';
 export default {
   data() {
     return {
@@ -17,22 +23,23 @@ export default {
     };
   },
   methods: {
-    enter(el, done) {
-      console.log('enter');
-      gsap.from(el, {
-        scale: 0,
-        x: 200,
-        onComplete: done,
-      });
+    beforeEnter() {
+      console.log('beforeEnter');
     },
-
-    leave(el, done) {
+    enter() {
+      console.log('enter');
+    },
+    afterEnter() {
+      console.log('afterEnter');
+    },
+    beforeLeave() {
+      console.log('beforeLeave');
+    },
+    leave() {
       console.log('leave');
-      gsap.to(el, {
-        scale: 0,
-        x: 200,
-        onComplete: done,
-      });
+    },
+    afterLeave() {
+      console.log('afterLeave');
     },
   },
 };
